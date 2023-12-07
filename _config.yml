@@ -7,7 +7,7 @@ description: "My blog"
 keyword: ""
 url: "https://soushuu.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
-github_repo: "https://soushuu.github.io" # you code repository
+github_repo: "https://soushuuu.github.io" # you code repository
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
@@ -100,6 +100,6 @@ service-worker: true
 friends: [
     {
         title: "test",
-        href: "https://soushuu.github.io"
+        href: "https://soushuuu.github.io"
     }
 ]
