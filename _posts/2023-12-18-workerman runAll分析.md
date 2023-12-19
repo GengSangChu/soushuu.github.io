@@ -87,7 +87,9 @@ public static function runAll(): void
 ~~~
 
 第一个方法仅仅是验证SAPI是否cli，否则不允许执行。作为常驻内存的一个PHP网络应用，也的确不适合使用FPM。
+
 ~~~php
+
 protected static function checkSapiEnv(): void
     {
         // Only for cli.
@@ -95,6 +97,7 @@ protected static function checkSapiEnv(): void
             exit("Only run in command line mode \n");
         }
     }
+
 ~~~
 
 
@@ -108,7 +111,9 @@ protected static function checkSapiEnv(): void
 * 设置进程title
 * 将每个启动的worker进程通过id添加到当前worker进程（即其他worker为当前worker的从属worker）
 * 初始化定时器Timer（设置SIGALRM信号处理函数）
+
 ~~~php
+
 protected static function init(): void
     {
         set_error_handler(function ($code, $msg, $file, $line) {
@@ -178,6 +183,7 @@ public static function init(EventInterface $event = null): void
             pcntl_signal(SIGALRM, ['\Workerman\Timer', 'signalHandle'], false);
         }
     }
+
 ~~~
 
 接下来是解析输入的命令行，可以看到支持6个命令：
@@ -195,6 +201,7 @@ public static function init(EventInterface $event = null): void
 * -g （平滑重启、优雅停止）
 
 ~~~php
+
 protected static function parseCommand(): void
     {
         if (DIRECTORY_SEPARATOR !== '/') {
@@ -350,11 +357,13 @@ protected static function parseCommand(): void
                 exit($usage);
         }
     }
+
 ~~~
 
 接下来是获取一个独占锁，然后执行若干写入操作后释放锁：
 
 ~~~php
+
 protected static function lock(int $flag = LOCK_EX): void
     {
         static $fd;
@@ -375,6 +384,7 @@ protected static function lock(int $flag = LOCK_EX): void
             }
         }
     }
+
 ~~~
 
 获取独占锁后，首先是判断是否为守护进程开启，是则 fork 出一个子进程然后exit掉父进程：
@@ -668,6 +678,7 @@ protected static function forkWorkersForLinux(): void
 ~~~
 
 在`forkOneWorkerForLinux`中：
+
 父进程：
 
 * 将fork出的子进程id保存到`static::$_pidMap`和`static::$_idMap`
